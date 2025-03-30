@@ -1,8 +1,12 @@
 package mx.tecnm.chi2.listacontactos;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button button_eliminar;
 
     AdminSQLlite admin;
+    SQLiteDatabase db;
 
 
     @Override
@@ -48,5 +53,42 @@ public class MainActivity extends AppCompatActivity {
         button_editar = findViewById(R.id.button_editar);
         button_eliminar = findViewById(R.id.button_eliminar);
 
+        button_agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                admin = new AdminSQLlite(MainActivity.this,"administracion",null,1);
+                db = admin.getWritableDatabase();
+
+                String id = editText_id.getText().toString().trim();
+                String nombre = editText_nombre.getText().toString().trim();
+                String telefono = editText_telefono.getText().toString().trim();
+                String email = editText_email.getText().toString().trim();
+
+                if(id.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty()){
+                    Toast.makeText(MainActivity.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ContentValues registro = new ContentValues();
+                registro.put("idcontacto",id);
+                registro.put("nombre",nombre);
+                registro.put("telefono",telefono);
+                registro.put("email",email);
+
+                long resultado = db.insert("Contacto",null,registro);
+                db.close();
+                if (resultado != -1) {
+                    Toast.makeText(MainActivity.this, "Registro Agregado", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Error al agregar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
+    /*public void cargarDatos(){
+        admin = new AdminSQLlite(MainActivity.this, "administracion",null,1);
+        db = admin.getReadableDatabase();
+
+    }*/
 }
