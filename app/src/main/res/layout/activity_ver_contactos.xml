@@ -11,26 +11,36 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginBottom="31dp"
         android:text="@string/textView_titulo_contacto"
         android:textSize="34sp"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="66dp" />
+        app:layout_constraintBottom_toTopOf="@+id/TextMultiLine_contactos"
+        app:layout_constraintStart_toStartOf="@+id/TextMultiLine_contactos"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/TextMultiLine_contactos"
         android:layout_width="226dp"
-        android:layout_height="451dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="34dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="142dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button_volver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Button
         android:id="@+id/button_volver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/button_volver"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="627dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/TextMultiLine_contactos"
+        app:layout_constraintTop_toBottomOf="@+id/TextMultiLine_contactos" />
 </androidx.constraintlayout.widget.ConstraintLayout>
