@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="66dp" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/TextMultiLine_contactos"
         android:layout_width="226dp"
         android:layout_height="451dp"
         android:ems="10"
@@ -25,4 +25,12 @@
         android:inputType="textMultiLine"
         tools:layout_editor_absoluteX="96dp"
         tools:layout_editor_absoluteY="142dp" />
+
+    <Button
+        android:id="@+id/button_volver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_volver"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="627dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

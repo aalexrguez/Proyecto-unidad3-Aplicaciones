@@ -1,6 +1,7 @@
 package mx.tecnm.chi2.listacontactos;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     Button button_editar;
     Button button_buscar;
     Button button_eliminar;
+    Button button_ver;
 
     AdminSQLlite admin;
     SQLiteDatabase db;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         button_buscar = findViewById(R.id.button_buscar);
         button_editar = findViewById(R.id.button_editar);
         button_eliminar = findViewById(R.id.button_eliminar);
+        button_ver = findViewById(R.id.button_ver);
 
         button_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +87,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
+
+        button_ver.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ver_contactos.class);
+                startActivity(intent);
+            }
+        });
+
+    } // cierre de onCreate
 
     /*public void cargarDatos(){
         admin = new AdminSQLlite(MainActivity.this, "administracion",null,1);
