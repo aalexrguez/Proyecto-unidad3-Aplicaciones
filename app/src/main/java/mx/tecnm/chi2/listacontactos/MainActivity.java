@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     Button button_buscar;
     Button button_eliminar;
 
+    AdminSQLlite admin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
