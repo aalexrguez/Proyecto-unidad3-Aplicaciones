@@ -1,5 +1,6 @@
 package mx.tecnm.chi2.listacontactos;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Button button_eliminar;
 
     AdminSQLlite admin;
+    SQLiteDatabase db;
 
 
     @Override
