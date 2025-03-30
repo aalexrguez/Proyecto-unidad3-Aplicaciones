@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ListaContactos</string>
+
+    <!-- textView -->
+    <string name="textView_titulo">Lista de contactos</string>
+    <string name="textView_id">Id</string>
+    <string name="textView_nombre">Nombre</string>
+    <string name="textView_telefono">Telefono</string>
+    <string name="textView_email">Email</string>
+    <string name="textView_buscar">Buscar</string>
+
+    <!-- button -->
+    <string name="button_agregar">Agregar</string>
+    <string name="button_eliminar">Eliminar</string>
+    <string name="button_editar">Editar</string>
+    <string name="button_buscar">Buscar</string>
+
+</resources>
