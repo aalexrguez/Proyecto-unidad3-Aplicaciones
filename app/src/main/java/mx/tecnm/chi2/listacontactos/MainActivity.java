@@ -2,6 +2,7 @@ package mx.tecnm.chi2.listacontactos;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -88,6 +89,38 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        button_buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nombreBuscar = editText_buscar_por_nombre.getText().toString().trim();
+
+                if (nombreBuscar.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Por favor, ingresa un nombre para buscar", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                admin = new AdminSQLlite(MainActivity.this, "administracion", null, 1);
+                db = admin.getReadableDatabase();
+
+                Cursor cursor = db.rawQuery("SELECT * FROM Contacto WHERE nombre=?", new String[]{nombreBuscar});
+
+                if (cursor.moveToFirst()) {
+                    editText_id.setText(cursor.getString(0)); // ID
+                    editText_nombre.setText(cursor.getString(1)); // Nombre
+                    editText_telefono.setText(cursor.getString(2)); // Teléfono
+                    editText_email.setText(cursor.getString(3)); // Email
+                    Toast.makeText(MainActivity.this, "Contacto encontrado", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "No se encontró el contacto", Toast.LENGTH_SHORT).show();
+                }
+
+                cursor.close();
+                db.close();
+            }
+            
+        });
+
+
         button_ver.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -99,9 +132,5 @@ public class MainActivity extends AppCompatActivity {
 
     } // cierre de onCreate
 
-    /*public void cargarDatos(){
-        admin = new AdminSQLlite(MainActivity.this, "administracion",null,1);
-        db = admin.getReadableDatabase();
 
-    }*/
 }
