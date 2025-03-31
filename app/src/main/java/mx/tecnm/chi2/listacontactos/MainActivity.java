@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 db.close();
                 if (resultado != -1) {
                     Toast.makeText(MainActivity.this, "Registro Agregado", Toast.LENGTH_SHORT).show();
+                    limpiarCampos();
                 } else {
                     Toast.makeText(MainActivity.this, "Error al agregar", Toast.LENGTH_SHORT).show();
                 }
@@ -146,12 +147,38 @@ public class MainActivity extends AppCompatActivity {
 
                 if (filasAfectadas > 0) {
                     Toast.makeText(MainActivity.this, "Contacto actualizado correctamente", Toast.LENGTH_SHORT).show();
+                    limpiarCampos();
                 } else {
                     Toast.makeText(MainActivity.this, "No se encontró el contacto con ese ID", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+
+        button_eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = editText_id.getText().toString().trim();
+
+                if (id.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Ingresa el ID del contacto a eliminar", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                admin = new AdminSQLlite(MainActivity.this, "administracion", null, 1);
+                db = admin.getWritableDatabase();
+
+                int filasEliminadas = db.delete("Contacto", "idcontacto=?", new String[]{id});
+                db.close();
+
+                if (filasEliminadas > 0) {
+                    Toast.makeText(MainActivity.this, "Contacto eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    limpiarCampos();
+                } else {
+                    Toast.makeText(MainActivity.this, "No se encontró el contacto con ese ID", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         button_ver.setOnClickListener(new View.OnClickListener() {
 
@@ -164,5 +191,12 @@ public class MainActivity extends AppCompatActivity {
 
     } // cierre de onCreate
 
+    private void limpiarCampos() {
+        editText_id.setText("");
+        editText_nombre.setText("");
+        editText_telefono.setText("");
+        editText_email.setText("");
+        editText_buscar_por_nombre.setText("");
+    }
 
 }
