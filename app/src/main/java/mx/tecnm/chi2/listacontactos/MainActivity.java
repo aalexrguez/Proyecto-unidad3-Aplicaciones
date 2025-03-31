@@ -120,6 +120,38 @@ public class MainActivity extends AppCompatActivity {
             
         });
 
+        button_editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = editText_id.getText().toString().trim();
+                String nombre = editText_nombre.getText().toString().trim();
+                String telefono = editText_telefono.getText().toString().trim();
+                String email = editText_email.getText().toString().trim();
+
+                if (id.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Todos los campos son obligatorios para editar", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                admin = new AdminSQLlite(MainActivity.this, "administracion", null, 1);
+                db = admin.getWritableDatabase();
+
+                ContentValues registro = new ContentValues();
+                registro.put("nombre", nombre);
+                registro.put("telefono", telefono);
+                registro.put("email", email);
+
+                int filasAfectadas = db.update("Contacto", registro, "idcontacto=?", new String[]{id});
+                db.close();
+
+                if (filasAfectadas > 0) {
+                    Toast.makeText(MainActivity.this, "Contacto actualizado correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "No se encontró el contacto con ese ID", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
         button_ver.setOnClickListener(new View.OnClickListener() {
 
