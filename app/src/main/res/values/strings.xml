@@ -20,4 +20,5 @@
     <!-- actividad vercontacto -->
     <string name="textView_titulo_contacto">Contactos</string>
     <string name="button_volver">Regresar</string>
+
 </resources>
